@@ -33,9 +33,9 @@ const VoiceMoment = () => {
           aria-label={isPlaying ? "Pause" : "Play"}
         >
           {isPlaying ? (
-            <Pause size={24} fill="currentColor" />
+            <Pause size={30} fill="currentColor" />
           ) : (
-            <Play size={24} fill="currentColor" className="ml-[1px]" />
+            <Play size={30} fill="currentColor" className="ml-[1px]" />
           )}
         </button>
 

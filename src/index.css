@@ -23,14 +23,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+/* a {
   font-weight: 500;
   /* color: #646cff; */
-  text-decoration: inherit;
-}
-a:hover {
+/* text-decoration: inherit; */
+/* }  */
+/* a:hover {
   color: #fff;
-}
+} */
 
 /* Disable hover, focus, active effects globally */
 button,
@@ -75,9 +75,9 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+/* button:hover {
   border-color: #646cff;
-}
+} */
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

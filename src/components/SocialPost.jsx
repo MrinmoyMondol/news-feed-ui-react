@@ -6,7 +6,7 @@ import VoiceIntro from "./inc/VoiceIntro.jsx";
 const SocialPost = ({
   name = "Nowreen",
   location = "New York City, United States",
-  description = "Hi, I'm Nowreen, a warm and family-oriented Asian woman with a passion for nurturing meaningful connections, preserving cultural traditions, and creating heartfelt experiences through cooking, storytelling...",
+  description = "Hi, I'm Nowreen, a warm and family-oriented Asian woman with a passion for nurturing meaningful connections, preserving cultural traditions, and creating heartfelt experiences through cooking, storytelling... ",
   profileUrl = "https://i.imgur.com/8Km9tLL.png",
   imageUrl = "https://picsum.photos/seed/202/400/300",
   globe = "/src/assets/icon/world.png",
@@ -78,14 +78,16 @@ const SocialPost = ({
       </div>
 
       {/* 5. Post Banner */}
-      <div className="flex items-center justify-between mt-[10px] bg-white px-[10px]">
+      <div className="flex items-start justify-between mt-[10px] bg-white px-[10px]">
         <div className="flex flex-col ml-[10px]">
-          <span className="text-[13px] text-left text-[#65676b] leading-[1]">Share Post</span>
-          <h3 className="text-[16px] font-bold text-[#050505] mt-[2px] leading-[1] tracking-tight">
+          <span className="text-[13px] text-left text-[#65676b] leading-[1]">
+            Share Post
+          </span>
+          <h3 className="text-[16px] font-bold text-[#050505] mt-[4px] leading-[1.15] tracking-tight">
             Tell your story in your own words
           </h3>
         </div>
-        <button className="bg-[#e4e6eb] hover:bg-[#d8dadf] text-[#050505] px-[14px] py-[7px] rounded-[8px] text-[14px] font-extrabold transition-colors whitespace-nowrap">
+        <button className="bg-[#e4e6eb] text-black px-[12px] py-[6px] rounded-[8px] text-[15px] font-extrabold whitespace-nowrap self-start mt-[2px]">
           Create Post
         </button>
       </div>
@@ -96,7 +98,7 @@ const SocialPost = ({
           <img src="https://i.pravatar.cc/100?u=a" className="w-[30px] h-[30px] rounded-full object-cover" alt="u1" />
           <img src="https://i.pravatar.cc/100?u=b" className="w-[30px] h-[30px] rounded-full object-cover" alt="u2" />
           <img src="https://i.pravatar.cc/100?u=c" className="w-[30px] h-[30px] rounded-full object-cover" alt="u3" />
-          <span className="text-[18px] font-semibold px-[5px] text-[#1a2b3c] ml-[15px] ml-1">{likes}</span>
+          <span className="text-[18px] font-semibold px-[5px] text-[#1a2b3c] ml-[10px] ml-1">{likes}</span>
         </div>
 
         <div className="flex items-center text-[#1a2b3c]">
