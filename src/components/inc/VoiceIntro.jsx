@@ -1,80 +1,72 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { Play, Pause } from "lucide-react";
+import WavesurferPlayer from "@wavesurfer/react";
 
 const VoiceMoment = () => {
-  const audioRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [wavesurfer, setWavesurfer] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  // প্লে/পজ টগল ফাংশন
-  const togglePlay = () => {
-    if (!audioRef.current) return;
-    if (playing) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setPlaying(!playing);
+  // Called when Wavesurfer is ready
+  const onReady = (ws) => {
+    setWavesurfer(ws);
+    setIsPlaying(false);
   };
 
-  // ওয়েভফর্মের বারগুলো (Elegant লুকের জন্য আরও বেশি বার যোগ করা হয়েছে)
-  const waveformBars = [
-    4, 8, 6, 12, 10, 5, 14, 8, 10, 6, 12, 9, 7, 11, 8, 13, 10, 6, 12, 8, 9, 11, 7, 10, 6, 12, 8, 5, 14, 9, 11, 7
-  ];
+  // Play/pause handler
+  const togglePlay = () => {
+    if (!wavesurfer) return;
+    wavesurfer.playPause();
+    setIsPlaying(!isPlaying);
+  };
 
   return (
-    <div className="bg-[#F8F9FB]  px-[6px] py-[5px] w-full  mx-auto shadow-sm transition-all duration-300">
-      
-
-      <h4 className="text-[14px] font-bold text-gray-800 text-center mb-5 tracking-tight uppercase opacity-80">
+    <div className="bg-[#F8F9FB] w-full max-w-md mx-auto rounded-lg px-6 py-4 shadow-sm border border-[#ECEEF2]">
+      <h4 className="text-[15px] font-bold text-gray-900 text-center mb-2 tracking-tight">
         Voice Values Moment
       </h4>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        {/* Play/Pause Button */}
         <button
           onClick={togglePlay}
-          className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md text-black transition-transform active:scale-90"
-          style={{ border: '1px solid rgba(0,0,0,0.05)' }}
+          className="flex items-center justify-center ml-[30px] text-black transition-transform active:scale-95"
+          aria-label={isPlaying ? "Pause" : "Play"}
         >
-          {playing ? (
-            <Pause size={20} fill="currentColor" />
+          {isPlaying ? (
+            <Pause size={24} fill="currentColor" />
           ) : (
-            <Play size={20} fill="currentColor" className="ml-1" />
+            <Play size={24} fill="currentColor" className="ml-[1px]" />
           )}
         </button>
 
-        <div className="flex-1 flex items-center justify-center gap-[3px] h-[30px]">
-          {waveformBars.map((h, i) => (
-            <div
-              key={i}
-              className={`w-[2.5px] rounded-full transition-all duration-500 ${
-                playing ? "bg-black" : "bg-gray-300"
-              }`}
-              style={{ 
-                height: `${h * 1.8}px`,
-                animation: playing ? `waveBounce 1.2s ease-in-out infinite ${i * 0.05}s` : 'none'
-              }}
-            />
-          ))}
+        {/* Waveform */}
+        <div className="flex-1">
+          <WavesurferPlayer
+            height={36}
+            waveColor="#111111"
+            progressColor="#111111"
+            cursorColor="#111111"
+            cursorWidth={0}
+            barWidth={2}
+            barGap={2}
+            barRadius={2}
+            url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            onReady={onReady}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            style={{ width: "100%" }}
+          />
         </div>
 
-        <span className="text-[13px] m-[12px] font-bold text-gray-600 tabular-nums">
+        {/* Duration placeholder */}
+        <span className="text-[13px] mr-[40px] font-bold  tabular-nums min-w-[40px] text-right">
           1:48
         </span>
       </div>
 
-      <p className="text-center text-[12px] font-medium text-gray-400 mt-4 tracking-wide">
-        Listen before you like
+      <p className="text-center text-[12px] font-bold  font-medium text-gray-500 mt-3">
+        Listen before you like.
       </p>
-
-      <audio
-        ref={audioRef}
-        onEnded={() => setPlaying(false)}
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        className="hidden"
-      />
-
-  
     </div>
   );
 };
